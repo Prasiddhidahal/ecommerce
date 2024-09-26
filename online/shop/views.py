@@ -24,4 +24,12 @@ def Category(request):
     Category_items = Category.objects.filter(user=request.user)
     total_price = sum(item.product.price * item.quantity for item in Category_items)
 
-    return render(request, 'Category.html', {'Category_items': Category_items, 'total_price': total_price})
+    return render(request, 'category.html', {'Category_items': Category_items, 'total_price': total_price})
+
+@login_required
+def Customer(request):
+    return render(request, 'customer.html')
+
+@login_required
+def Order(request):
+    return render(request, 'order.html')
