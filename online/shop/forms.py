@@ -1,7 +1,7 @@
 from django import forms
 from .models import User
 from .models import Product
-from .models import Cart
+from .models import Category
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -49,9 +49,9 @@ class ProductForm(forms.ModelForm):
             'photo': forms.FileInput(attrs={'class': 'form-control'}),
         }
 
-class CartForm(forms.ModelForm):
+class CategoryForm(forms.ModelForm):
     class Meta:
-        model = Cart
+        model = Category
         fields = '__all__'
         labels = {
             'product': 'Product',
