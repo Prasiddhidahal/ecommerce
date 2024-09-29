@@ -1,16 +1,16 @@
 from django.shortcuts import render,get_object_or_404, redirect
-from .models import User, Product, Category
+from .models import User, Product, Category, Customer
 from django.contrib.auth.decorators import login_required
 
 def index(request):
     users = User.objects.all()  
     return render(request, 'index.html', {'users': users})  
 
-def about(request):
-    return render(request, 'about.html')
+# def about(request):
+#     return render(request, 'order.html')
 
-def contact(request):
-    return render(request, 'contact.html')
+# def contact(request):
+#     return render(request, 'customer.html')
 
 def products(request):
     products = Product.objects.all()  
@@ -26,9 +26,9 @@ def Category(request):
 
     return render(request, 'category.html', {'Category_items': Category_items, 'total_price': total_price})
 
-@login_required
-def Customer(request):
-    return render(request, 'customer.html')
+def customer(request):
+    customer = Customer.objects.all()  
+    return render(request, 'customer.html', {'customer': customer})  
 
 @login_required
 def Order(request):

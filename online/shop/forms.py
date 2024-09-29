@@ -1,7 +1,7 @@
 from django import forms
 # from .models import User
 from .models import Product
-from .models import Category, Customer, Order
+from .models import Category, customer, Order
 
 # class UserForm(forms.ModelForm):
 #     class Meta:
@@ -62,22 +62,22 @@ class CategoryForm(forms.ModelForm):
             'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
-class CustomerForm(forms.ModelForm):
+class customerForm(forms.ModelForm):
     class Meta:
-        model = Customer
+        model = customer
         fields = '__all__'
         labels = {
             'user': 'User', 
-            'name': 'Customer Name',
-            'email': 'Customer Email',  
-            'phone': 'Customer Phone',
-            'address': 'Customer Address',
-            'city': 'Customer City',
-            'state': 'Customer State',
-            'country': 'Customer Country',
+            'name': 'customer Name',
+            'email': 'customer Email',  
+            'phone': 'customer Phone',
+            'address': 'customer Address',
+            'city': 'customer City',
+            'state': 'customer State',
+            'country': 'customer Country',
 
-            'zip_code': 'Customer Zip Code',
-            'photo': 'Customer Photo',
+            'zip_code': 'customer Zip Code',
+            'photo': 'customer Photo',
 
         }
         widgets = {
@@ -98,7 +98,7 @@ class OrderForm(forms.ModelForm):
         model = Order
         fields = '__all__'
         labels = {
-            'customer': 'Customer',
+            'customer': 'customer',
             'product': 'Product',
             'quantity': 'Quantity',
             'price': 'Price',
