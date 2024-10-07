@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from colorfield.fields import ColorField
+
 # class User(models.Model):
 #     name = models.CharField(max_length=100)
 #     email = models.EmailField()
@@ -17,7 +19,6 @@ from django.contrib.auth.models import User
 
 #     def __str__(self):
 #         return self.name
-
 class Product(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -25,6 +26,18 @@ class Product(models.Model):
     photo = models.ImageField(upload_to='photo', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    COLOR_PALETTE = [
+        ("#FFFFFF", "white"),
+        ("#000000", "black"),
+        ("#FF0000", "red"),
+        ("#00FF00", "green"),
+        ("#0000FF", "blue"),
+        
+    ]
+    
+    
+    color = ColorField(samples=COLOR_PALETTE)
 
     def __str__(self):
         return self.name

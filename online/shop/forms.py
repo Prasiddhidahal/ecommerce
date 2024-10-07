@@ -1,7 +1,8 @@
 from django import forms
 # from .models import User
 from .models import Product
-from .models import Category, customer, Order
+from .models import Category, Customer, Order
+import re
 
 # class UserForm(forms.ModelForm):
 #     class Meta:
@@ -32,6 +33,9 @@ from .models import Category, customer, Order
 #             'photo': forms.ImageInput(attrs={'class': 'form-control'}),
 #         }
 
+
+
+
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
@@ -41,13 +45,17 @@ class ProductForm(forms.ModelForm):
             'price': 'Product Price',
             'description': 'Product Description',
             'photo': 'Product Photo',
+            'color': 'Product Color',
         }
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'photo': forms.FileInput(attrs={'class': 'form-control'}),
+            'color': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+
 
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -62,9 +70,9 @@ class CategoryForm(forms.ModelForm):
             'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
-class customerForm(forms.ModelForm):
+class CustomerForm(forms.ModelForm):
     class Meta:
-        model = customer
+        model = Customer
         fields = '__all__'
         labels = {
             'user': 'User', 

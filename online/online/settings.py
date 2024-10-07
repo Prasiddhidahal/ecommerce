@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'shop',
+    # 'maintenance_mode',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'maintenance_mode.middleware.MaintenanceModeMiddleware',
 ]
 
 ROOT_URLCONF = 'online.urls'
@@ -77,8 +80,12 @@ WSGI_APPLICATION = 'online.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'Ecommerce',
+        'USER': 'postgres',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',    
+        'PORT': '5432',
     }
 }
 
@@ -130,3 +137,25 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+MAINTENANCE_MODE = None
+# MAINTENANCE_MODE_IGNORE_ADMIN_SITE = False
+# MAINTENANCE_MODE_IGNORE_ANONYMOUS_USER = False
+# MAINTENANCE_MODE_IGNORE_AUTHENTICATED_USER = False
+# MAINTENANCE_MODE_IGNORE_STAFF = False
+# MAINTENANCE_MODE_IGNORE_SUPERUSER = False
+# MAINTENANCE_MODE_IGNORE_TEST = False
+# MAINTENANCE_MODE_IGNORE_IP_ADDRESSES = []
+# MAINTENANCE_MODE_IGNORE_URLS = []
+# MAINTENANCE_MODE_IGNORE_PATHS = []
+# MAINTENANCE_MODE_IGNORE_USER_AGENTS = []
+
+# MAINTENANCE_MODE = True
+
+JAZZMIN_SETTINGS = {
+      "site_title": "Ecommerce",
+      "site_header": "Ecommerce",
+      "site_brand": "password admin",
+        "site_logo": "myapp/logo.jpeg",
+
+
+}

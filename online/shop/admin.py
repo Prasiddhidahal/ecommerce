@@ -8,7 +8,12 @@ from .models import Order
 
 # admin.site.register(User)
 
-admin.site.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'color', 'updated_at')
+    # You can add 'color' to fields if you want to make it editable directly
+    fields = ['name', 'price', 'description', 'photo', 'color']
+
+admin.site.register(Product, ProductAdmin)
 
 admin.site.register(Category)
 
