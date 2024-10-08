@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',
+    # 'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -151,11 +151,28 @@ MAINTENANCE_MODE = None
 
 # MAINTENANCE_MODE = True
 
-JAZZMIN_SETTINGS = {
-      "site_title": "Ecommerce",
-      "site_header": "Ecommerce",
-      "site_brand": "password admin",
-        "site_logo": "myapp/logo.jpeg",
+# JAZZMIN_SETTINGS = {
+#       "site_title": "Ecommerce",
+#       "site_header": "Ecommerce",
+#       "site_brand": "password admin",
+#         "site_logo": "myapp/logo.jpeg",
+#         "login_logo_dark": True,
+#         "welcome_sign": "Welcome ",
+#         "search_model": ["auth.User", "auth.Shop"],
+# "topmenu_links": [
 
+#         # Url that gets reversed (Permissions can be added)
+#         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
 
-}
+#         # external url that opens in a new window (Permissions can be added)
+#         {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+
+#         # model admin to link to (Permissions checked against model)
+#         {"model": "auth.User"},
+
+#         # App with dropdown menu to all its models pages (Permissions checked against models)
+#         {"shop": "products"},
+#     ],
+#     "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
+
+# }
