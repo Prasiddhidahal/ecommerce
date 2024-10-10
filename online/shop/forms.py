@@ -1,7 +1,8 @@
 from django import forms
 # from .models import User
 from .models import Product
-from .models import Category, Customer, Order
+from .models import Category, Customer, Order,register, logout,login
+from django.contrib.auth.forms import AuthenticationForm
 import re
 
 # class UserForm(forms.ModelForm):
@@ -80,7 +81,7 @@ class CustomerForm(forms.ModelForm):
             'email': 'customer Email',  
             'phone': 'customer Phone',
             'address': 'customer Address',
-            'city': 'customer City',
+            
             'state': 'customer State',
             'country': 'customer Country',
 
@@ -94,7 +95,7 @@ class CustomerForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control'}),
             'address': forms.Textarea(attrs={'class': 'form-control'}),
-            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            
             'state': forms.TextInput(attrs={'class': 'form-control'}),
             'country': forms.TextInput(attrs={'class': 'form-control'}),
             'zip_code': forms.TextInput(attrs={'class': 'form-control'}),
@@ -104,9 +105,9 @@ class CustomerForm(forms.ModelForm):
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['customer', 'product', 'quantity', 'price']  # Exclude price if you want to calculate it in the view
         labels = {
-            'customer': 'customer',
+            'customer': 'Customer',
             'product': 'Product',
             'quantity': 'Quantity',
             'price': 'Price',
@@ -117,3 +118,45 @@ class OrderForm(forms.ModelForm):
             'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
         }
+class registerForm(forms.ModelForm):
+    class Meta:
+        model = register
+        fields = '__all__'
+        labels = {
+            'name': 'Full Name',
+            'email': 'Email Address',
+            'password': 'Password',
+            'phone': 'Phone Number',
+            'address': 'Address',
+            'city': 'City',
+            'state': 'State',
+            'country': 'Country',
+            'zip_code': 'Zip Code',
+            'photo': 'Photo',
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'password': forms.PasswordInput(attrs={'class': 'form-control'}),
+            'phone': forms.TextInput(attrs={'class': 'form-control'}),
+            'address': forms.Textarea(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
+            'state': forms.TextInput(attrs={'class': 'form-control'}),
+            'country': forms.TextInput(attrs={'class': 'form-control'}),
+            'zip_code': forms.TextInput(attrs={'class': 'form-control'}),
+            'photo': forms.ClearableFileInput(attrs={'class': 'form-control'}),  # Updated to ClearableFileInput
+        }
+
+class loginForm(forms.Form):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}) )
+
+    class Meta:
+        model = register
+        fields = ['email', 'password']
+
+class logoutForm(forms.Form):
+    pass
+
+class CustomAuthenticationForm(AuthenticationForm):
+    username = forms.EmailField(label='Email')

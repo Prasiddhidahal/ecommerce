@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from colorfield.fields import ColorField
+from django_countries.fields import CountryField
 
 # class User(models.Model):
 #     name = models.CharField(max_length=100)
@@ -10,7 +11,7 @@ from colorfield.fields import ColorField
 #     phone = models.CharField(max_length=100)
 #     address = models.TextField()
 #     city = models.CharField(max_length=100)
-#     state = models.CharField(max_length=100)
+#     state = models.CharField(max_length=100) 
 #     country = models.CharField(max_length=100)
 #     zip_code = models.CharField(max_length=100)
 #     created_at = models.DateTimeField(auto_now_add=True)
@@ -49,21 +50,21 @@ class Category(models.Model):
     added_at = models.DateTimeField(default=timezone.now)
 
 
-    
+
+
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=100)
     address = models.TextField()
-    city = models.CharField(max_length=100)
-    state = models.CharField(max_length=100)
-    country = models.CharField(max_length=100)
+    country = CountryField(multiple=True)  # Confirm this is how you want to define country
     zip_code = models.CharField(max_length=100)
     photo = models.ImageField(upload_to='photo', blank=True, null=True)
 
     def __str__(self):
         return self.name
+
     
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -73,4 +74,36 @@ class Order(models.Model):
     ordered_at = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.product.name
+        return f"Order for {self.product.name} by {self.customer.name}"
+    
+class register(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    password = models.CharField(max_length=100)
+    phone = models.CharField(max_length=100)
+    address = models.TextField()
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    country = models.CharField(max_length=100)
+    zip_code = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    photo = models.ImageField(upload_to='photo', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+class login(models.Model):
+    email = models.EmailField()
+    password = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.email
+    
+class logout(models.Model):
+    email = models.EmailField()
+    password = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.email
+    

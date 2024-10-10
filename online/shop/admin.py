@@ -4,6 +4,7 @@ from .models import Product
 from .models import Category
 from .models import Customer
 from .models import Order
+from .models import register,login, logout
 # Register your models here.
 
 # admin.site.register(User)
@@ -20,3 +21,10 @@ admin.site.register(Category)
 admin.site.register(Customer)
 
 admin.site.register(Order)
+
+admin.site.register(register)
+
+admin.site.register(login)
+
+admin.site.register(logout)
+

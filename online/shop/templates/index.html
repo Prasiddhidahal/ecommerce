@@ -18,16 +18,16 @@
                 <div class="collapse navbar-collapse" id="navbarContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'customer' %}">Customer</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'products' %}">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'Order' %}">order Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'customer' %}">customer Us</a>
+                            <a class="nav-link" href="{% url 'Order' %}">Order Us</a>
                         </li>
                     </ul>
                 </div>
@@ -41,7 +41,7 @@
                     <strong>{{ user.name }}</strong> - {{ user.email }}<br>
                     {{ user.phone }}<br>
                     {{ user.address }}<br>
-                    {{ user.city }}, {{ user.state }}, {{ user.country }} - {{ user.zip_code }}<br>
+                    {{ user.state }}, {{ user.country }} - {{ user.zip_code }}<br>
                     {% if user.photo %}
                         <img src="{{ user.photo.url }}" alt="{{ user.name }}" style="max-width: 100px; max-height: 100px;"/>
                     {% endif %}

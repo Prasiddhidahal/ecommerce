@@ -39,11 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_countries',
     'shop',
+    'rest_framework',
     # 'maintenance_mode',
 ]
-
+CORS_ALLOW_ALL_ORIGINS = True
 MIDDLEWARE = [
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
