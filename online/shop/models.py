@@ -86,8 +86,7 @@ class register(models.Model):
     state = models.CharField(max_length=100)
     country = models.CharField(max_length=100)
     zip_code = models.CharField(max_length=100)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    last_login = models.DateTimeField(blank=True, null=True)  # Add this field
     photo = models.ImageField(upload_to='photo', blank=True, null=True)
 
     def __str__(self):

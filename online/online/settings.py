@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'rest_framework',
     # 'maintenance_mode',
 ]
+CSRF_COOKIE_SECURE = False  # Use True for HTTPS environments
+CSRF_USE_SESSIONS = False
 CORS_ALLOW_ALL_ORIGINS = True
 MIDDLEWARE = [
     

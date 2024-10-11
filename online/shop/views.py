@@ -1,11 +1,16 @@
+from pyexpat.errors import messages
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import User, Product, Category, Customer
 from django.contrib.auth.decorators import login_required
 from maintenance_mode.decorators import force_maintenance_mode_off
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm 
 from .forms import registerForm, OrderForm
 from django.contrib.auth import authenticate, logout, login as auth_login
 from .forms import CustomAuthenticationForm
+from django.utils import timezone
+from .models import register
+from django.contrib import messages
+
 
 def index(request):
     users = User.objects.all()  
@@ -58,32 +63,41 @@ def Order(request):
     }
     return render(request, 'order.html', context)
 
-def register(request):
+def registers(request):
     if request.method == 'POST':
         form = registerForm(request.POST, request.FILES)
         if form.is_valid():
-            
-            user = form.save()  
-            
-            auth_login(request, user)  
-            return redirect('success')  
+            user = form.save()  # Save the user from the form
+            auth_login(request, user)  # Log in the user
+            return redirect('success')  # Redirect to a success page after registration
     else:
-        form = registerForm()
-    
+        form = registerForm()  # Display the empty registration form
+
     return render(request, 'register.html', {'form': form})
 
 def login(request):
     if request.method == 'POST':
-        form = CustomAuthenticationForm(request, data=request.POST)  # Use your custom form
-        if form.is_valid():
-            user = form.get_user()
-            auth_login(request, user)
-            return redirect('home')
-    else:
-        initial_data = {'username': '', 'password': ''}
-        form = CustomAuthenticationForm(initial=initial_data)
+        email = request.POST.get('email')
+        password = request.POST.get('password')
 
-    return render(request, 'login.html', {'form': form})
+        if email and password:
+            try:
+                user = register.objects.get(email=email)
+                if user.password == password:
+                    auth_login(request, user)
+                    user.last_login = timezone.now()
+                    user.save()
+                    messages.success(request, 'Login successful! Welcome back.')
+                    return redirect('home')
+                else:
+                    messages.error(request, 'Invalid password.')
+            except register.DoesNotExist:
+                messages.error(request, 'Invalid email.')
+        else:
+            messages.error(request, 'Both email and password are required.')
+
+    return render(request, 'login.html')
+
 
 
 def logout(request):
