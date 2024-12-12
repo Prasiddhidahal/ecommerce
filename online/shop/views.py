@@ -67,11 +67,11 @@ def registers(request):
     if request.method == 'POST':
         form = registerForm(request.POST, request.FILES)
         if form.is_valid():
-            user = form.save()  # Save the user from the form
-            auth_login(request, user)  # Log in the user
-            return redirect('success')  # Redirect to a success page after registration
+            user = form.save()  
+            auth_login(request, user)  
+            return redirect('success')  
     else:
-        form = registerForm()  # Display the empty registration form
+        form = registerForm() 
 
     return render(request, 'register.html', {'form': form})
 

@@ -4,14 +4,14 @@ from .models import Product
 from .models import Category
 from .models import Customer
 from .models import Order
-from .models import register,login, logout
+from .models import register
 # Register your models here.
 
 # admin.site.register(User)
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'price', 'color', 'updated_at')
-    # You can add 'color' to fields if you want to make it editable directly
+    
     fields = ['name', 'price', 'description', 'photo', 'color']
 
 admin.site.register(Product, ProductAdmin)
@@ -24,7 +24,7 @@ admin.site.register(Order)
 
 admin.site.register(register)
 
-admin.site.register(login)
+# admin.site.register(login)
 
-admin.site.register(logout)
+# admin.site.register(logout)
 

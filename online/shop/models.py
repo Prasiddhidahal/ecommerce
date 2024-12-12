@@ -92,17 +92,17 @@ class register(models.Model):
     def __str__(self):
         return self.name
 
-class login(models.Model):
-    email = models.EmailField()
-    password = models.CharField(max_length=100)
+# class login(models.Model):
+#     email = models.EmailField()
+#     password = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.email
+#     def __str__(self):
+#         return self.email
     
-class logout(models.Model):
-    email = models.EmailField()
-    password = models.CharField(max_length=100)
+# class logout(models.Model):
+#     email = models.EmailField()
+#     password = models.CharField(max_length=100)
 
-    def __str__(self):
-        return self.email
+#     def __str__(self):
+#         return self.email
     
